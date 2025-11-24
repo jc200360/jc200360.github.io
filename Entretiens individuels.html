@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Entretiens personnalisés – Argos 2001</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Présentation des entretiens personnalisés (accueils individualisés) proposés par Argos 2001 : objectifs, déroulement, posture d'écoute et limites.">
+
+<style>
+    :root {
+        --primary: #4a90e2;
+        --primary-dark: #3574b9;
+        --bg: #f3f6f9;
+        --text: #222;
+        --card-bg: #ffffff;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+        margin: 0;
+        padding: 40px 15px;
+        background: var(--bg);
+        color: var(--text);
+    }
+
+    .container {
+        max-width: 960px;
+        margin: 0 auto;
+    }
+
+    header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    h1 {
+        color: #2c3e50;
+        font-size: 32px;
+        margin: 0 0 10px 0;
+    }
+
+    h2.section-title {
+        font-size: 24px;
+        margin: 30px 0 10px 0;
+        color: #2c3e50;
+    }
+
+    p.lead {
+        font-size: 18px;
+        line-height: 1.6;
+        margin-top: 10px;
+    }
+
+    .intro-card, .info-card {
+        background: var(--card-bg);
+        border-radius: 10px;
+        padding: 20px 22px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+        margin-bottom: 25px;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(74,144,226,0.1);
+        color: var(--primary);
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-bottom: 8px;
+    }
+
+    ul {
+        padding-left: 18px;
+    }
+
+    li {
+        margin-bottom: 4px;
+    }
+
+    .pill-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 6px;
+    }
+
+    .pill {
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: #eef3fb;
+        font-size: 13px;
+    }
+
+    /* Bouton global */
+    #toggleAll {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin: 10px 0 25px 0;
+        padding: 10px 18px;
+        background: var(--primary);
+        color: #fff;
+        font-size: 16px;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: background 0.25s, transform 0.1s, box-shadow 0.1s;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    #toggleAll:hover {
+        background: var(--primary-dark);
+    }
+
+    #toggleAll:active {
+        transform: translateY(1px);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    #toggleAll span.icon {
+        font-size: 18px;
+    }
+
+    /* FAQ */
+    .faq {
+        margin-top: 10px;
+    }
+
+    details {
+        background: #fff;
+        border-radius: 8px;
+        padding: 10px 12px;
+        margin-bottom: 8px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+
+    summary {
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 17px;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .arrow {
+        font-size: 14px;
+        color: var(--primary-dark);
+    }
+
+    .answer {
+        margin-top: 8px;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    footer {
+        margin-top: 40px;
+        font-size: 13px;
+        color: #555;
+        text-align: center;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            padding: 20px 10px;
+        }
+        h1 {
+            font-size: 26px;
+        }
+        summary {
+            font-size: 16px;
+        }
+        .answer {
+            font-size: 15px;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Ajout automatique des flèches aux questions
+        document.querySelectorAll("summary").forEach(summary => {
+            const arrow = document.createElement("span");
+            arrow.classList.add("arrow");
+            arrow.textContent = "▶";
+            summary.insertBefore(arrow, summary.firstChild);
+        });
+
+        // Bouton tout ouvrir / tout fermer
+        const button = document.getElementById("toggleAll");
+        const items = document.querySelectorAll("details");
+        let allOpen = false;
+
+        button.addEventListener("click", () => {
+            allOpen = !allOpen;
+            items.forEach(item => {
+                item.open = allOpen;
+            });
+            const label = allOpen ? "Tout fermer" : "Tout ouvrir";
+            button.querySelector(".label").textContent = label;
+            button.querySelector(".icon").textContent = allOpen ? "▾" : "▸";
+        });
+    });
+</script>
+</head>
+
+<body>
+<div class="container">
+
+    <header>
+        <div class="badge">Argos 2001 – Entretiens personnalisés</div>
+        <h1>Les entretiens personnalisés (accueils individualisés)</h1>
+        <p class="lead">
+            Les entretiens personnalisés d’Argos 2001 sont des temps d’accueil individuel (ou en petit
+            groupe) avec deux bénévoles pairs. Ils offrent un espace plus intime qu’un groupe de parole,
+            pour déposer ce qui est difficile, poser des questions et trouver des repères pour la suite.
+        </p>
+    </header>
+
+    <!-- EN UN COUP D’ŒIL -->
+    <section class="intro-card">
+        <h2 class="section-title">En un coup d’œil</h2>
+        <p>
+            • <strong>Public&nbsp;:</strong> personnes vivant avec un trouble bipolaire, proches, ou personnes en questionnement.<br>
+            • <strong>Qui accueille&nbsp;:</strong> deux bénévoles pairs (patients ou proches) formés à l’écoute.<br>
+            • <strong>Durée&nbsp;:</strong> environ 15 à 30 minutes selon le nombre de personnes en attente.<br>
+            • <strong>Cadre&nbsp;:</strong> écoute bienveillante, confidentialité, respect du rythme de chacun.<br>
+            • <strong>Objectif&nbsp;:</strong> créer un premier lien, aider à y voir plus clair, orienter vers les ressources utiles.
+        </p>
+        <div class="pill-list">
+            <span class="pill">Écoute compréhensive</span>
+            <span class="pill">Confidentialité</span>
+            <span class="pill">Pair-aidance</span>
+            <span class="pill">Soutien à l’autonomie</span>
+        </div>
+    </section>
+
+    <!-- OU ET COMMENT ? -->
+    <section class="info-card">
+        <h2 class="section-title">Où et comment se déroulent les entretiens&nbsp;?</h2>
+        <p>
+            Les entretiens personnalisés sont proposés, sans rendez-vous, dans différents lieux partenaires
+            ou à distance&nbsp;:
+        </p>
+        <ul>
+            <li>Maison des Usagers de l’hôpital Sainte-Anne,</li>
+            <li>GEM des Pyrénées,</li>
+            <li>Cité de la santé à la Villette,</li>
+            <li>ou en ligne, par visioconférence (Zoom).</li>
+        </ul>
+        <p>
+            La personne est parfois accompagnée d’un proche. Les bénévoles se présentent (prénom, patient
+            ou proche, rôle dans l’association) et précisent qu’ils ne sont pas des soignants&nbsp;: ce sont des
+            pairs aidants, qui parlent à partir de leur propre expérience.
+        </p>
+    </section>
+
+    <!-- OBJECTIFS -->
+    <section class="info-card">
+        <h2 class="section-title">Pourquoi proposer des entretiens personnalisés&nbsp;?</h2>
+        <p>
+            L’objectif principal n’est pas de “résoudre” immédiatement la situation, mais d’ouvrir un espace
+            de parole sécurisant où la personne peut&nbsp;:
+        </p>
+        <ul>
+            <li>exprimer ce qu’elle vit, ses inquiétudes, ses questions ;</li>
+            <li>se sentir entendue et reconnue dans sa souffrance ;</li>
+            <li>prendre un peu de recul sur la situation ;</li>
+            <li>retrouver du pouvoir de réflexion et d’action ;</li>
+            <li>être orientée, si besoin, vers d’autres ressources (groupes de parole, GEM, lectures, centres experts, etc.).</li>
+        </ul>
+    </section>
+
+    <!-- BOUTON FAQ -->
+    <button id="toggleAll">
+        <span class="icon">▸</span>
+        <span class="label">Tout ouvrir</span>
+    </button>
+
+    <div class="faq">
+        <!-- ATTITUDE COMPREHENSIVE -->
+        <h2 class="section-title">Notre posture d’écoute compréhensive</h2>
+
+        <details>
+            <summary>Quels sont les principes de l’écoute pendant l’entretien&nbsp;?</summary>
+            <div class="answer">
+                <p>
+                    Les bénévoles privilégient une attitude d’écoute compréhensive. Cela implique notamment&nbsp;:
+                </p>
+                <ul>
+                    <li>une présence forte et attentive, sans distraction, ici et maintenant ;</li>
+                    <li>une écoute bienveillante qui met en confiance, sans jugement ;</li>
+                    <li>un réel intérêt pour le vécu et les émotions de la personne ;</li>
+                    <li>une expression chaleureuse et authentique, sans jouer un rôle ;</li>
+                    <li>le respect du rythme de la personne, sans la brusquer ;</li>
+                    <li>le rappel de la confidentialité&nbsp;: ce qui se dit dans l’entretien reste dans l’entretien.</li>
+                </ul>
+            </div>
+        </details>
+
+        <details>
+            <summary>Qu’est-ce que la “reformulation” et à quoi sert-elle&nbsp;?</summary>
+            <div class="answer">
+                <p>
+                    La reformulation consiste à redire avec ses propres mots ce que la personne vient d’exprimer
+                    (“Si je comprends bien, vous…”) afin de&nbsp;:
+                </p>
+                <ul>
+                    <li>vérifier que le message a bien été compris ;</li>
+                    <li>montrer à la personne qu’elle est entendue et prise au sérieux ;</li>
+                    <li>l’aider à clarifier ce qu’elle ressent et pense ;</li>
+                    <li>faire reculer le sentiment de solitude.</li>
+                </ul>
+                <p>
+                    On distingue la reformulation “reflet” (reprendre le vécu et l’émotion) et la
+                    reformulation “clarification”, qui aide à ajuster le regard sur la situation, sans faire
+                    d’enquête ni d’interrogatoire.
+                </p>
+            </div>
+        </details>
+
+        <details>
+            <summary>Quelle est la place de l’empathie dans l’accueil&nbsp;?</summary>
+            <div class="answer">
+                <p>
+                    Les bénévoles cherchent à être en empathie&nbsp;: ils s’efforcent de comprendre, avec les mots
+                    et les émotions de la personne, ce qu’elle traverse. Il ne s’agit pas de “souffrir à sa place”
+                    ni de tout partager, mais d’entrer dans son point de vue, le temps de l’entretien, pour mieux
+                    l’accompagner.
+                </p>
+            </div>
+        </details>
+
+        <!-- LIMITES ET SITUATIONS PARTICULIERES -->
+        <h2 class="section-title">Limites de l’entretien et situations particulières</h2>
+
+        <details>
+            <summary>L’entretien peut-il tout résoudre&nbsp;?</summary>
+            <div class="answer">
+                <p>
+                    Non. Un entretien ne peut pas tout régler. Parfois, la personne ne perçoit pas immédiatement
+                    l’aide que l’écoute lui apporte. L’essentiel est alors qu’elle se soit sentie accueillie,
+                    considérée et un peu moins seule face à ce qu’elle vit.
+                </p>
+            </div>
+        </details>
+
+        <details>
+            <summary>Que se passe-t-il en cas de risque pour la personne&nbsp;?</summary>
+            <div class="answer">
+                <p>
+                    Si les bénévoles perçoivent que la personne pourrait mettre sa vie ou sa santé gravement
+                    en danger, ils essaient d’abord de mieux comprendre la situation et, si nécessaire, de
+                    l’orienter vers les professionnels ou services d’urgence adaptés. Les entretiens ne remplacent
+                    jamais un suivi médical ni la prise en charge d’une situation de crise.
+                </p>
+            </div>
+        </details>
+
+        <details>
+            <summary>Que faire quand la communication devient très difficile&nbsp;?</summary>
+            <div class="answer">
+                <p>
+                    Il arrive que la personne soit tellement submergée qu’il devienne difficile d’échanger. Dans
+                    ce cas, les bénévoles peuvent&nbsp;:
+                </p>
+                <ul>
+                    <li>nommer la difficulté à communiquer (“Là, j’ai du mal à vous suivre…”),</li>
+                    <li>revenir aux émotions (“Qu’est-ce que vous ressentez surtout en ce moment&nbsp;?”),</li>
+                    <li>proposer un temps de pause, ou un autre temps d’échange ultérieur si nécessaire.</li>
+                </ul>
+            </div>
+        </details>
+
+        <!-- DEROULEMENT ET FIN -->
+        <h2 class="section-title">Déroulement et fin de l’entretien</h2>
+
+        <details>
+            <summary>Comment se déroule généralement un entretien&nbsp;?</summary>
+            <div class="answer">
+                <p>
+                    Un entretien se déroule en plusieurs temps&nbsp;:
+                </p>
+                <ul>
+                    <li>accueil et présentation de chacun ;</li>
+                    <li>invitation à dire ce qui amène la personne et ce qu’elle vient chercher ;</li>
+                    <li>temps d’écoute et d’échanges, avec reformulations et éclairages si besoin ;</li>
+                    <li>éventuelles pistes ou informations pratiques en fin d’entretien (groupes, GEM, lectures, sites, etc.).</li>
+                </ul>
+            </div>
+        </details>
+
+        <details>
+            <summary>Comment sait-on quand l’entretien doit se terminer&nbsp;?</summary>
+            <div class="answer">
+                <p>
+                    Un entretien ne doit pas se prolonger trop longtemps&nbsp;: rester dans une durée d’environ
+                    15 à 30 minutes permet de garder une écoute de qualité. Quand le temps est écoulé ou que
+                    la discussion tourne en rond, les bénévoles peuvent&nbsp;:
+                </p>
+                <ul>
+                    <li>rappeler le cadre (temps limité, autres personnes en attente) ;</li>
+                    <li>faire une courte reformulation de ce qui a été partagé ;</li>
+                    <li>proposer des suites possibles&nbsp;: revenir à un accueil, participer à un groupe de parole, adhérer à l’association, etc.</li>
+                </ul>
+                <p>
+                    L’idée est de se quitter sur des paroles qui soutiennent et redonnent un peu d’espoir.
+                </p>
+            </div>
+        </details>
+
+        <!-- CE QU’ON NE FAIT PAS -->
+        <h2 class="section-title">Ce que les entretiens ne sont pas</h2>
+
+        <details>
+            <summary>Qu’est-ce qui n’est pas proposé dans un entretien personnalisé&nbsp;?</summary>
+            <div class="answer">
+                <p>
+                    Pour préserver la qualité de l’accueil et le respect du rôle de chacun, les bénévoles veillent à&nbsp;:
+                </p>
+                <ul>
+                    <li>ne pas laisser l’entretien durer au-delà d’une demi-heure, sauf situation exceptionnelle ;</li>
+                    <li>ne pas vouloir “donner des solutions” à tout prix ;</li>
+                    <li>ne pas parler en même temps que la personne, ni faire autre chose pendant qu’elle s’exprime ;</li>
+                    <li>éviter l’enquête détaillée ou intrusive (pas d’“investigation”) ;</li>
+                    <li>garder une empathie juste, sans confusion des places (pas de “trop de sympathie”).</li>
+                </ul>
+                <p>
+                    Les bénévoles ne se substituent ni aux soignants ni aux proches&nbsp;: ils apportent une
+                    écoute complémentaire, basée sur l’expérience et la pair-aidance.
+                </p>
+            </div>
+        </details>
+    </div><!-- /.faq -->
+
+    <footer>
+        <p>
+            Cette page présente les grandes lignes des entretiens personnalisés proposés par Argos 2001.
+            Elle peut être adaptée selon les pratiques locales (lieux d’accueil, modalités, contacts, etc.).
+        </p>
+    </footer>
+
+</div><!-- /.container -->
+</body>
+</html>
