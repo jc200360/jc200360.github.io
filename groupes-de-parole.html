@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Groupes de parole – Argos 2001</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Présentation des groupes de parole Argos 2001 : objectifs, règles, déroulement, rôle des animateurs et questions fréquentes.">
+
+<style>
+    :root {
+        --primary: #4a90e2;
+        --primary-dark: #3574b9;
+        --bg: #f3f6f9;
+        --text: #222;
+        --card-bg: #ffffff;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+        margin: 0;
+        padding: 40px 15px;
+        background: var(--bg);
+        color: var(--text);
+    }
+
+    .container {
+        max-width: 960px;
+        margin: 0 auto;
+    }
+
+    header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    h1 {
+        color: #2c3e50;
+        font-size: 32px;
+        margin: 0 0 10px 0;
+    }
+
+    h2.section-title {
+        font-size: 24px;
+        margin: 30px 0 10px 0;
+        color: #2c3e50;
+    }
+
+    p.lead {
+        font-size: 18px;
+        line-height: 1.6;
+        margin-top: 10px;
+    }
+
+    .intro-card {
+        background: var(--card-bg);
+        border-radius: 10px;
+        padding: 20px 22px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+        margin-bottom: 25px;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(74,144,226,0.1);
+        color: var(--primary);
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-bottom: 8px;
+    }
+
+    /* Bouton global */
+    #toggleAll {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 0 25px 0;
+        padding: 10px 18px;
+        background: var(--primary);
+        color: #fff;
+        font-size: 16px;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: background 0.25s, transform 0.1s, box-shadow 0.1s;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    #toggleAll:hover {
+        background: var(--primary-dark);
+    }
+
+    #toggleAll:active {
+        transform: translateY(1px);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    #toggleAll span.icon {
+        font-size: 18px;
+    }
+
+    .faq {
+        margin-top: 10px;
+    }
+
+    details {
+        background: var(--card-bg);
+        margin: 10px 0;
+        padding: 16px 18px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        border-left: 4px solid var(--primary);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    details:hover {
+        transform: translateX(2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    summary {
+        font-weight: 600;
+        font-size: 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .arrow {
+        transition: transform 0.3s;
+        font-size: 18px;
+        margin-left: 12px;
+        flex-shrink: 0;
+    }
+
+    details[open] .arrow {
+        transform: rotate(90deg);
+    }
+
+    .answer {
+        margin-top: 10px;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .answer ul {
+        margin: 8px 0 8px 20px;
+        padding: 0;
+    }
+
+    .answer li {
+        margin-bottom: 4px;
+    }
+
+    .pill-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 6px;
+    }
+
+    .pill {
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: #eef3fb;
+        font-size: 13px;
+    }
+
+    footer {
+        margin-top: 40px;
+        font-size: 13px;
+        color: #555;
+        text-align: center;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            padding: 20px 10px;
+        }
+        h1 {
+            font-size: 26px;
+        }
+        summary {
+            font-size: 16px;
+        }
+        .answer {
+            font-size: 15px;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Ajout automatique des flèches aux questions
+        document.querySelectorAll("summary").forEach(summary => {
+            const arrow = document.createElement("span");
+            arrow.classList.add("arrow");
+            arrow.textContent = "▶";
+            summary.appendChild(arrow);
+        });
+
+        // Bouton tout ouvrir / tout fermer
+        const button = document.getElementById("toggleAll");
+        const items = document.querySelectorAll("details");
+        let allOpen = false;
+
+        button.addEventListener("click", () => {
+            allOpen = !allOpen;
+            items.forEach(item => {
+                item.open = allOpen;
+            });
+            const label = allOpen ? "Tout fermer" : "Tout ouvrir";
+            button.querySelector(".label").textContent = label;
+            button.querySelector(".icon").textContent = allOpen ? "▾" : "▸";
+        });
+    });
+</script>
+</head>
+
+<body>
+<div class="container">
+
+    <header>
+        <div class="badge">Argos 2001 – Groupes de parole</div>
+        <h1>Les groupes de parole chez Argos 2001</h1>
+        <p class="lead">
+            Les groupes de parole d’Argos 2001 sont des espaces d’écoute et de partage entre patients
+            concernés par un trouble bipolaire et leurs proches. Ils complètent le suivi médical en
+            permettant de rompre l’isolement, de partager des expériences et de renforcer le pouvoir d’agir
+            de chacun.
+        </p>
+    </header>
+
+    <section class="intro-card">
+        <h2 class="section-title">En un coup d’œil</h2>
+        <p>
+            • <strong>Public&nbsp;:</strong> personnes vivant avec un trouble bipolaire et leurs proches<br>
+            • <strong>Animation&nbsp;:</strong> toujours en binôme de bénévoles formés<br>
+            • <strong>Durée type&nbsp;:</strong> environ 2 heures<br>
+            • <strong>Taille du groupe&nbsp;:</strong> idéalement 8 à 15 participants<br>
+            • <strong>Objectif&nbsp;:</strong> mieux se comprendre, partager, se soutenir, sans jugement
+        </p>
+        <div class="pill-list">
+            <span class="pill">Écoute</span>
+            <span class="pill">Confidentialité</span>
+            <span class="pill">Partage d’expérience</span>
+            <span class="pill">Entre pairs</span>
+        </div>
+    </section>
+
+    <button id="toggleAll">
+        <span class="icon">▸</span>
+        <span class="label">Tout ouvrir</span>
+    </button>
+
+    <div class="faq">
+        <!-- 1. Comprendre les groupes de parole -->
+        <h2 class="section-title">Comprendre les groupes de parole</h2>
+
+        <details>
+            <summary>Qu’est-ce qu’un groupe de parole Argos 2001&nbsp;?</summary>
+            <div class="answer">
+                <p>
+                    Un groupe de parole est un espace d’échanges confidentiel où des personnes concernées
+                    par le trouble bipolaire – patients et proches – partagent leur vécu, leurs émotions et
+                    leurs questions dans un cadre respectueux et bienveillant. Il ne remplace pas un suivi
+                    psychiatrique ni une psychothérapie, mais vient les compléter.
+                </p>
+            </div>
+        </details>
+
+        <details>
+            <summary>Quels sont les objectifs principaux&nbsp;?</summary>
+            <div class="answer">
+                <ul>
+                    <li>Rompre l’isolement souvent lié au trouble bipolaire.</li>
+                    <li>Partager des expériences concrètes de vie, de traitement, de relations.</li>
+                    <li>Se sentir compris par des personnes qui vivent des réalités proches.</li>
+                    <li>Renforcer l’autonomie et le pouvoir d’agir de chacun.</li>
+                    <li>Donner de l’espoir en rencontrant des personnes en cours de rétablissement.</li>
+                </ul>
+            </div>
+        </details>
+
+        <details>
+            <summary>À qui s’adressent ces groupes&nbsp;?</summary>
+            <div class="answer">
+                <p>
+                    Les groupes s’adressent&nbsp;:
+                </p>
+                <ul>
+                    <li>aux personnes vivant avec un trouble bipolaire (diagnostiquées ou en questionnement),</li>
+                    <li>à leurs proches (famille, conjoint·e, ami·e, etc.),</li>
+                    <li>à toute personne souhaitant mieux comprendre le vécu lié au trouble, dans le respect du cadre.</li>
+                </ul>
+            </div>
+        </details>
+
+        <!-- 2. Règles du groupe -->
+        <h2 class="section-title">Règles de fonctionnement</h2>
+
+        <details>
+            <summary>Quelles sont les règles de base d’un groupe de parole&nbsp;?</summary>
+            <div class="answer">
+                <ul>
+                    <li><strong>Confidentialité&nbsp;:</strong> tout ce qui est dit dans le groupe reste dans le groupe.</li>
+                    <li><strong>Bienveillance et non-jugement&nbsp;:</strong> on accueille la parole de chacun sans critique.</li>
+                    <li><strong>Respect de la parole&nbsp;:</strong> on ne coupe pas la parole, on évite les dialogues et les débats.</li>
+                    <li><strong>Liberté&nbsp;:</strong> chacun est libre de parler ou de garder le silence.</li>
+                    <li><strong>Cadre horaire&nbsp;:</strong> le respect des horaires permet un fonctionnement serein.</li>
+                </ul>
+            </div>
+        </details>
+
+        <details>
+            <summary>Pourquoi insiste-t-on sur l’expression en “je”&nbsp;?</summary>
+            <div class="answer">
+                <p>
+                    Parler à la première personne (“je”) signifie&nbsp;:
+                </p>
+                <ul>
+                    <li>que l’on parle de <strong>son propre vécu</strong>, de ses ressentis, de son expérience,</li>
+                    <li>que l’on évite les généralités (“les bipolaires sont…”) et les jugements sur les autres,</li>
+                    <li>que chacun reste responsable de sa parole.</li>
+                </ul>
+            </div>
+        </details>
+
+        <details>
+            <summary>Peut-on parler de traitements et de médicaments&nbsp;?</summary>
+            <div class="answer">
+                <p>
+                    Les groupes de parole ne remplacent pas la relation avec les soignants. On peut évoquer
+                    son ressenti par rapport aux traitements, mais&nbsp;:
+                </p>
+                <ul>
+                    <li>les animateurs ne donnent <strong>pas</strong> de conseils médicaux,</li>
+                    <li>un même traitement peut avoir des effets très différents selon les personnes,</li>
+                    <li>les décisions thérapeutiques restent du ressort du médecin.</li>
+                </ul>
+            </div>
+        </details>
+
+        <!-- 3. Déroulement d’une séance -->
+        <h2 class="section-title">Déroulement d’une séance</h2>
+
+        <details>
+            <summary>Comment se déroule généralement une séance&nbsp;?</summary>
+            <div class="answer">
+                <p>Une séance type dure environ deux heures et comprend&nbsp;:</p>
+                <ul>
+                    <li><strong>Accueil</strong> des participants par les animateurs.</li>
+                    <li><strong>Rappel du cadre</strong> et des règles du groupe.</li>
+                    <li><strong>Tour de table</strong> de présentation (prénom, patient ou proche, “météo du jour”, sujets souhaités).</li>
+                    <li><strong>Échanges</strong> autour d’un ou plusieurs thèmes proposés par les participants.</li>
+                    <li><strong>Tour de clôture</strong> éventuel&nbsp;: chacun peut dire ce que la séance lui a apporté.</li>
+                </ul>
+            </div>
+        </details>
+
+        <details>
+            <summary>Quels thèmes sont le plus souvent abordés&nbsp;?</summary>
+            <div class="answer">
+                <p>
+                    Les thèmes sont proposés par les participants. Parmi les sujets fréquents&nbsp;:
+                </p>
+                <ul>
+                    <li>compréhension du trouble bipolaire et de son évolution,</li>
+                    <li>rétablissement, rechutes, prévention des crises,</li>
+                    <li>relation avec les soignants, choix du suivi, thérapies,</li>
+                    <li>vie quotidienne&nbsp;: sommeil, travail, études, couple, famille, amitiés,</li>
+                    <li>place des proches, bonne distance à trouver,</li>
+                    <li>addictions, comorbidités, émotions, acceptation / déni,</li>
+                    <li>“trucs et astuces” pour mieux vivre au quotidien, retrouver son pouvoir d’agir.</li>
+                </ul>
+            </div>
+        </details>
+
+        <details>
+            <summary>Que se passe-t-il en fin de séance&nbsp;?</summary>
+            <div class="answer">
+                <p>
+                    Selon le temps disponible, un tour de table final permet à chacun d’exprimer comment il
+                    repart&nbsp;: plus apaisé, avec des pistes, des questions, etc. Les animateurs rappellent que
+                    chacun peut revenir à d’autres groupes et, s’il le souhaite, adhérer à l’association.
+                </p>
+            </div>
+        </details>
+
+        <!-- 4. Rôle des animateurs -->
+        <h2 class="section-title">Rôle des animateurs</h2>
+
+        <details>
+            <summary>Quel est le rôle des animateurs&nbsp;?</summary>
+            <div class="answer">
+                <p>
+                    Les groupes sont animés par deux bénévoles formés. Leur rôle principal est de&nbsp;:
+                </p>
+                <ul>
+                    <li>poser et faire respecter le cadre et les règles du groupe,</li>
+                    <li>faciliter la circulation de la parole et la participation de tous,</li>
+                    <li>reformuler, clarifier, synthétiser ce qui est exprimé,</li>
+                    <li>veiller à ce que personne ne soit laissé de côté ni envahissant pour les autres,</li>
+                    <li>préserver un climat d’écoute, de sécurité et de respect.</li>
+                </ul>
+            </div>
+        </details>
+
+        <details>
+            <summary>Les animateurs peuvent-ils donner leur avis ou des conseils&nbsp;?</summary>
+            <div class="answer">
+                <p>
+                    Les animateurs parlent parfois de leur propre expérience, mais toujours en “je” et avec
+                    prudence. Leur rôle n’est pas de&nbsp;:
+                </p>
+                <ul>
+                    <li>dire quoi faire,</li>
+                    <li>se substituer aux soignants,</li>
+                    <li>imposer une vision ou des choix de vie.</li>
+                </ul>
+                <p>
+                    Ils accompagnent le groupe, sans se placer au-dessus des autres participants.
+                </p>
+            </div>
+        </details>
+
+        <details>
+            <summary>Que fait l’animateur en cas de tension ou de conflit&nbsp;?</summary>
+            <div class="answer">
+                <p>
+                    Si des tensions apparaissent, l’animateur peut&nbsp;:
+                </p>
+                <ul>
+                    <li>rappeler le cadre de respect et de bienveillance,</li>
+                    <li>redonner la parole tour à tour en évitant les confrontations directes,</li>
+                    <li>proposer une pause ou un recentrage sur le ressenti de chacun,</li>
+                    <li>aborder en fin de séance la façon dont le groupe a vécu la situation.</li>
+                </ul>
+            </div>
+        </details>
+
+        <!-- 5. Questions pratiques et situations particulières -->
+        <h2 class="section-title">Questions pratiques &amp; situations particulières</h2>
+
+        <details>
+            <summary>Que faire si je ne souhaite pas parler&nbsp;?</summary>
+            <div class="answer">
+                <p>
+                    Il est tout à fait possible d’assister à un groupe de parole sans prendre la parole. La
+                    <strong>liberté de parler ou non</strong> fait partie du cadre. Écouter les autres peut déjà être
+                    précieux, surtout lors des premières séances.
+                </p>
+            </div>
+        </details>
+
+        <details>
+            <summary>Que se passe-t-il si quelqu’un monopolise la parole&nbsp;?</summary>
+            <div class="answer">
+                <p>
+                    Les animateurs veillent à ce que chacun ait la possibilité de s’exprimer. Ils peuvent
+                    intervenir pour&nbsp;:
+                </p>
+                <ul>
+                    <li>remercier la personne pour son partage,</li>
+                    <li>lui proposer de conclure pour laisser de la place aux autres,</li>
+                    <li>relancer ceux qui parlent moins.</li>
+                </ul>
+            </div>
+        </details>
+
+        <details>
+            <summary>Comment sont accueillies les émotions fortes (larmes, colère, etc.)&nbsp;?</summary>
+            <div class="answer">
+                <p>
+                    Les émotions ont toute leur place dans un groupe de parole. Les animateurs&nbsp;:
+                </p>
+                <ul>
+                    <li>accueillent ce qui se passe sans jugement,</li>
+                    <li>peuvent proposer un temps de silence ou de respiration,</li>
+                    <li>invitent le groupe à rester dans l’écoute et la bienveillance.</li>
+                </ul>
+                <p>
+                    Si nécessaire, un échange plus individuel peut être proposé après la séance.
+                </p>
+            </div>
+        </details>
+
+        <details>
+            <summary>Les professionnels de santé peuvent-ils participer&nbsp;?</summary>
+            <div class="answer">
+                <p>
+                    Les groupes de parole Argos 2001 sont des espaces entre pairs. Les professionnels de
+                    santé n’y participent pas en tant qu’animateurs ou intervenants&nbsp;; ils ne peuvent y être
+                    présents que comme proches ou patients, en respectant le même cadre que les autres.
+                </p>
+            </div>
+        </details>
+
+        <details>
+            <summary>Comment devenir bénévole ou co-animateur&nbsp;?</summary>
+            <div class="answer">
+                <p>
+                    En général, il est demandé d’avoir&nbsp;:
+                </p>
+                <ul>
+                    <li>participé à plusieurs groupes de parole en tant que participant,</li>
+                    <li>un certain recul sur son propre parcours,</li>
+                    <li>l’envie de se former à l’écoute et à l’animation.</li>
+                </ul>
+                <p>
+                    Les modalités concrètes (formation, accompagnement en binôme, etc.) sont précisées
+                    par l’association, antenne par antenne.
+                </p>
+            </div>
+        </details>
+
+    </div><!-- /.faq -->
+
+    <footer>
+        <p>
+            Ce texte peut être adapté selon les pratiques locales d’Argos 2001
+            (fréquence des groupes, modalités d’inscription, contacts, etc.).
+        </p>
+    </footer>
+
+</div><!-- /.container -->
+</body>
+</html>
