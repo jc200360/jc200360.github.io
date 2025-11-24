@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Accueil – ARGOS 2001 (maquette moderne)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ARGOS 2001 est une association nationale de patients et de proches au service des personnes touchées par un trouble bipolaire.">
+
+<style>
+    :root {
+        --primary: #4a90e2;
+        --primary-dark: #3574b9;
+        --accent: #ff6b6b;
+        --accent-2: #ffb347;
+        --accent-3: #7bdcb5;
+        --bg: #f3f6f9;
+        --text: #222;
+        --card-bg: #ffffff;
+        --radius-card: 14px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+        background: radial-gradient(circle at top left, #e8f2ff 0, #f3f6f9 40%, #fdf8ff 100%);
+        color: var(--text);
+    }
+
+    .page {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 24px 16px 40px;
+    }
+
+    /* HEADER / NAV */
+    .site-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    .logo-area {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .logo-mark {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: 700;
+        font-size: 18px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .logo-text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+    }
+
+    .logo-text span:first-child {
+        font-weight: 700;
+        letter-spacing: 0.04em;
+    }
+
+    .logo-text span:last-child {
+        font-size: 13px;
+        color: #555;
+    }
+
+    .site-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .nav-link {
+        font-size: 14px;
+        text-decoration: none;
+        color: #333;
+        padding: 6px 10px;
+        border-radius: 999px;
+        transition: background 0.2s, color 0.2s;
+    }
+
+    .nav-link.primary {
+        background: rgba(74, 144, 226, 0.12);
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .nav-link:hover {
+        background: rgba(0,0,0,0.04);
+        color: var(--primary-dark);
+    }
+
+    .nav-contact {
+        font-size: 12px;
+        color: #555;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        text-align: right;
+    }
+
+    .nav-contact a {
+        color: var(--primary-dark);
+        text-decoration: none;
+    }
+
+    .nav-contact a:hover {
+        text-decoration: underline;
+    }
+
+    /* HERO */
+    .hero {
+        background: linear-gradient(135deg, rgba(74,144,226,0.15), rgba(255,107,107,0.08));
+        border-radius: 26px;
+        padding: 28px 26px;
+        display: grid;
+        grid-template-columns: minmax(0, 3fr) minmax(0, 2.3fr);
+        gap: 24px;
+        margin-bottom: 28px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    }
+
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: #fff;
+        color: var(--primary);
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 10px;
+    }
+
+    .hero-badge-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: var(--accent);
+    }
+
+    .hero-title {
+        font-size: 28px;
+        color: #1f2b3a;
+        margin: 0 0 8px 0;
+    }
+
+    .hero-subtitle {
+        margin: 0 0 18px 0;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #444;
+    }
+
+    .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: none;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background 0.2s, transform 0.08s, box-shadow 0.08s;
+        white-space: nowrap;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(74,144,226,0.45);
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    }
+
+    .btn-outline {
+        background: #fff;
+        color: var(--primary-dark);
+        border: 1px solid rgba(74,144,226,0.3);
+    }
+
+    .btn:active {
+        transform: translateY(1px);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .hero-note {
+        margin-top: 14px;
+        font-size: 13px;
+        color: #555;
+    }
+
+    .hero-visual {
+        border-radius: 22px;
+        background: #fff;
+        padding: 18px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: space-between;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+    }
+
+    .hero-illustration {
+        border-radius: 18px;
+        background: linear-gradient(135deg, #4a90e2, #ff6b6b);
+        padding: 16px;
+        color: #fff;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    .hero-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 6px;
+    }
+
+    .hero-tag {
+        font-size: 11px;
+        padding: 3px 9px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.2);
+    }
+
+    .hero-small {
+        font-size: 13px;
+        color: #444;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .hero-small a {
+        color: var(--primary-dark);
+        text-decoration: none;
+    }
+
+    .hero-small a:hover {
+        text-decoration: underline;
+    }
+
+    /* SECTIONS */
+    .section {
+        margin-top: 30px;
+    }
+
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 16px;
+        margin-bottom: 14px;
+    }
+
+    .section-title {
+        font-size: 20px;
+        margin: 0;
+        color: #1f2b3a;
+    }
+
+    .section-subtitle {
+        font-size: 14px;
+        color: #666;
+        margin: 0;
+    }
+
+    .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .grid-4 {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+    }
+
+    .card {
+        background: var(--card-bg);
+        border-radius: var(--radius-card);
+        padding: 16px 16px 14px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        border-top: 4px solid transparent;
+    }
+
+    .card:nth-child(1) { border-top-color: var(--primary); }
+    .card:nth-child(2) { border-top-color: var(--accent); }
+    .card:nth-child(3) { border-top-color: var(--accent-3); }
+
+    .card-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 12px;
+        background: rgba(74,144,226,0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+    }
+
+    .card-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin: 4px 0 0;
+    }
+
+    .card-text {
+        font-size: 14px;
+        color: #555;
+        margin: 4px 0 0;
+    }
+
+    .card-meta {
+        font-size: 13px;
+        color: #666;
+    }
+
+    .card-link {
+        margin-top: 8px;
+        font-size: 13px;
+        color: var(--primary-dark);
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .card-link span { font-size: 14px; }
+
+    .pill {
+        display: inline-block;
+        padding: 3px 9px;
+        border-radius: 999px;
+        background: #eef3fb;
+        font-size: 12px;
+        color: #445;
+        margin-top: 4px;
+    }
+
+    .about-text {
+        font-size: 15px;
+        line-height: 1.7;
+        color: #444;
+        margin: 0 0 10px;
+    }
+
+    /* FOOTER */
+    .site-footer {
+        margin-top: 34px;
+        padding-top: 18px;
+        border-top: 1px solid #dde3ec;
+        font-size: 13px;
+        color: #666;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+    }
+
+    .footer-links a {
+        color: #666;
+        text-decoration: none;
+    }
+
+    .footer-links a:hover {
+        color: var(--primary-dark);
+    }
+
+    .footer-emails a {
+        color: var(--primary-dark);
+        text-decoration: none;
+    }
+
+    .footer-emails a:hover {
+        text-decoration: underline;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+        .hero { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 720px) {
+        .grid-3 { grid-template-columns: 1fr; }
+        .grid-2 { grid-template-columns: 1fr; }
+        .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .site-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .site-nav { justify-content: flex-start; }
+        .nav-contact { text-align: left; }
+    }
+
+    @media (max-width: 480px) {
+        .page { padding: 18px 12px 30px; }
+        .hero-title { font-size: 24px; }
+    }
+</style>
+</head>
+
+<body>
+<div class="page">
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="logo-area">
+            <div class="logo-mark">A</div>
+            <div class="logo-text">
+                <span>ARGOS 2001</span>
+                <span>Entraide autour des troubles bipolaires</span>
+            </div>
+        </div>
+        <nav class="site-nav">
+            <a href="https://argos2001.net/les-troubles-bipolaires/" class="nav-link">Comprendre la bipolarité</a>
+            <a href="https://argos2001.net/activites/" class="nav-link">Groupes de parole & activités</a>
+            <a href="https://argos2001.net/nos-antennes-par-region/" class="nav-link">Antennes par région</a>
+            <a href="https://argos2001.net/a-suivre-chez-argos-2001/" class="nav-link primary">Calendrier des activités</a>
+            <div class="nav-contact">
+                <span>✉️ <a href="mailto:contact@argos2001.fr">contact@argos2001.fr</a></span>
+                <span>❓ <a href="mailto:questions@argos2001.fr">questions@argos2001.fr</a></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div>
+            <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                <span>Association de patients & proches</span>
+            </div>
+            <h1 class="hero-title">Écouter. Comprendre. Accompagner les troubles bipolaires.</h1>
+            <p class="hero-subtitle">
+                ARGOS 2001 est une association nationale animée par des patients et des proches.
+                Nous proposons des groupes de parole, des entretiens individuels et des actions
+                d’entraide pour mieux vivre avec un trouble bipolaire.
+            </p>
+            <div class="hero-actions">
+                <a href="https://argos2001.net/activites/" class="btn btn-primary">
+                    <span>Découvrir les groupes de parole</span>
+                </a>
+                <a href="https://argos2001.net/a-suivre-chez-argos-2001/" class="btn btn-outline">
+                    <span>Voir le calendrier des activités</span>
+                </a>
+            </div>
+            <p class="hero-note">
+                Que vous soyez directement concerné par un trouble bipolaire ou proche d’une personne concernée,
+                vous êtes le bienvenu. Chacun avance à son rythme.
+            </p>
+        </div>
+
+        <aside class="hero-visual">
+            <div class="hero-illustration">
+                <strong>Un espace pour ne plus être seul.</strong>
+                <p>
+                    Partager son vécu, écouter d’autres parcours, trouver des idées concrètes pour le quotidien.
+                    Ici, on parle librement, sans jugement.
+                </p>
+                <div class="hero-tags">
+                    <span class="hero-tag">Patients</span>
+                    <span class="hero-tag">Proches</span>
+                    <span class="hero-tag">Entraide</span>
+                    <span class="hero-tag">Visio & présentiel</span>
+                </div>
+            </div>
+            <div class="hero-small">
+                <span><strong>📞 Ligne d’écoute : 01 46 28 01 03</strong></span>
+                <span>Du lundi au vendredi, de 10h à 13h.</span>
+                <span>✉️ Contact général : <a href="mailto:contact@argos2001.fr">contact@argos2001.fr</a></span>
+                <span>❓ Questions sur les activités : <a href="mailto:questions@argos2001.fr">questions@argos2001.fr</a></span>
+            </div>
+        </aside>
+    </section>
+
+    <!-- ACCÈS RAPIDES -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Accès rapides</h2>
+            <p class="section-subtitle">Choisissez ce dont vous avez besoin aujourd’hui.</p>
+        </div>
+
+        <div class="grid-3">
+            <article class="card">
+                <div class="card-icon">📞</div>
+                <h3 class="card-title">Ligne d’écoute</h3>
+                <p class="card-text">
+                    Besoin de parler à quelqu’un qui comprend ? Des bénévoles formés vous écoutent
+                    de manière bienveillante et confidentielle.
+                </p>
+                <p class="card-meta">
+                    Lundi → vendredi · 10h–13h<br>
+                    <strong>01 46 28 01 03</strong>
+                </p>
+            </article>
+
+            <article class="card">
+                <div class="card-icon">🗣️</div>
+                <h3 class="card-title">Groupes de parole</h3>
+                <p class="card-text">
+                    Patients, proches ou groupes mixtes : des temps d’échanges entre pairs,
+                    encadrés par deux animateurs formés, en visio ou en présentiel.
+                </p>
+                <a href="https://argos2001.net/activites/" class="card-link">En savoir plus sur les groupes <span>→</span></a>
+            </article>
+
+            <article class="card">
+                <div class="card-icon">💬</div>
+                <h3 class="card-title">Entretiens individuels</h3>
+                <p class="card-text">
+                    Un temps d’accueil personnalisé avec deux bénévoles : poser vos questions,
+                    faire le point sur votre situation, être orienté.
+                </p>
+                <p class="card-meta">
+                    En visio ou dans certains hôpitaux partenaires.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <!-- NOUVEAUTÉS DU MOIS -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Nouveautés & temps forts</h2>
+            <p class="section-subtitle">Le rendez-vous des personnes concernées et de leurs proches.</p>
+        </div>
+
+        <div class="grid-2">
+            <article class="card">
+                <div class="card-icon" style="background: rgba(255,107,107,0.12);">📅</div>
+                <h3 class="card-title">Calendrier du mois</h3>
+                <p class="card-text">
+                    Groupes de parole, entretiens individuels, conférences en ligne, marche conviviale…
+                    Retrouvez toutes les dates du mois en un coup d’œil.
+                </p>
+                <a href="https://argos2001.net/a-suivre-chez-argos-2001/" class="card-link">Voir le calendrier complet <span>→</span></a>
+            </article>
+
+            <article class="card">
+                <div class="card-icon" style="background: rgba(255,179,71,0.15);">🎥</div>
+                <h3 class="card-title">Conférence du mois / Replay</h3>
+                <p class="card-text">
+                    Thèmes de vie quotidienne, parentalité, travail, couple, traitements… Nos conférences
+                    sont accessibles en direct ou en replay sur YouTube.
+                </p>
+                <a href="https://argos2001.net/conferences-argos/" class="card-link">Accéder aux replays <span>→</span></a>
+            </article>
+        </div>
+    </section>
+
+    <!-- COMPRENDRE LA BIPOLARITÉ -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Comprendre les troubles bipolaires</h2>
+            <p class="section-subtitle">Pour les personnes concernées et leurs proches.</p>
+        </div>
+
+        <p class="about-text">
+            Les troubles bipolaires peuvent toucher toute personne, à différents moments de sa vie.
+            Mieux connaître la maladie, c’est aussi mieux vivre avec elle, pour soi comme pour son entourage.
+            Nous mettons à votre disposition des ressources claires et fiables.
+        </p>
+
+        <div class="grid-3">
+            <article class="card">
+                <h3 class="card-title">Découvrir le trouble bipolaire</h3>
+                <p class="card-text">
+                    Types de troubles, symptômes, idées reçues, parcours de soin : des repères pour y voir plus clair.
+                </p>
+                <span class="pill">Patients & proches</span>
+            </article>
+            <article class="card">
+                <h3 class="card-title">Être proche d’une personne concernée</h3>
+                <p class="card-text">
+                    Comment accompagner sans s’épuiser ? Trouver sa place, poser des limites, garder du lien.
+                </p>
+                <span class="pill">Famille · conjoints · amis</span>
+            </article>
+            <article class="card">
+                <h3 class="card-title">Ressources & aides pratiques</h3>
+                <p class="card-text">
+                    Droits, aides sociales, emploi, études, vie quotidienne : des pistes pour avancer concrètement.
+                </p>
+                <span class="pill">Vie quotidienne</span>
+            </article>
+        </div>
+    </section>
+
+    <!-- NOS ACTIONS -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Nos actions</h2>
+            <p class="section-subtitle">Des lieux et des temps pour se sentir moins seul.</p>
+        </div>
+
+        <div class="grid-4">
+            <article class="card">
+                <h3 class="card-title">Groupes de parole</h3>
+                <p class="card-text">En ligne ou en présentiel, pour partager entre pairs.</p>
+            </article>
+            <article class="card">
+                <h3 class="card-title">Entretiens individuels</h3>
+                <p class="card-text">Un accueil personnalisé, à votre rythme.</p>
+            </article>
+            <article class="card">
+                <h3 class="card-title">Activités en région</h3>
+                <p class="card-text">Des antennes locales proches de chez vous.</p>
+            </article>
+            <article class="card">
+                <h3 class="card-title">Conférences & vidéos</h3>
+                <p class="card-text">Pour s’informer et mieux comprendre.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- SOUTENIR -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Soutenir ARGOS 2001</h2>
+            <p class="section-subtitle">Ensemble, nous faisons vivre l’entraide.</p>
+        </div>
+
+        <p class="about-text">
+            Adhérer ou faire un don à ARGOS 2001, c’est soutenir une association de patients et de
+            proches qui agit concrètement pour rompre l’isolement, informer, et combattre la stigmatisation.
+        </p>
+        <a href="https://argos2001.net/adhesion-dons/" class="btn btn-primary">Adhérer ou faire un don</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div>
+            © ARGOS 2001 – Association de patients et de proches autour des troubles bipolaires.
+        </div>
+        <div class="footer-links">
+            <span class="footer-emails">
+                ✉️ <a href="mailto:contact@argos2001.fr">contact@argos2001.fr</a> ·
+                <a href="mailto:questions@argos2001.fr">questions@argos2001.fr</a>
+            </span>
+            ·
+            <a href="https://argos2001.net/mentions-legales/">Mentions légales</a>·
+            <a href="https://argos2001.net/politique-de-confidentialite/">Politique de confidentialité</a>·
+            <a href="https://argos2001.net/contact/">Contact</a>
+        </div>
+    </footer>
+
+</div>
+</body>
+</html>
